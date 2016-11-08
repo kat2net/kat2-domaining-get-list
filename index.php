@@ -1,4 +1,5 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+header('Content-Typle: application/json');
 
-echo file_get_contents($_GET['url']);
+file_get_contents($_GET['url']);
