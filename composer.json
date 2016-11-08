@@ -1,1 +1,7 @@
-{}
+{
+    "scripts": {
+        "post-update-cmd": [
+            "mkdir /app/d"
+        ]
+    }
+}
