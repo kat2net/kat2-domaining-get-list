@@ -2,16 +2,16 @@
 $domains = array();
 
 if(getList()){
-    echo time()."\n";
+    $i = 1;
+    $c = count($domains);
     foreach($domains as $domain){
         $isAvailable = isAvailable($domain['domain'], $domain['tld']);
         if($isAvailable){
-            echo $domain['domain']."\n";
+            echo $i.':'.$c.'|'.$domain['domain']."\n";
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
+        $i++;
     }
-    echo time()."\n";
-    echo 'done';
 
     //remove lock
     unlink('/app/d/lock');
@@ -49,8 +49,6 @@ function getDomains($url){
                     ($tld == 'com')
                     ||
                     ($tld == 'net')
-                    ||
-                    ($tld == 'org')
                 ){
                     $domains[] = array(
                         'domain' => $line,
