@@ -13,9 +13,7 @@ function getList(){
     $data = file_get_contents('http://intern.kat2.net/api/domaining/get-list/');
     $array = json_decode($data, true);
 
-    print_r($array);
-
-    if($array['success']){
+    if($array['success'] == true){
         getDomains($row['url']);
         return $row['id'];
     }else{
