@@ -1,13 +1,29 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-ob_implicit_flush(1);
+$id = getList();
+$domains = '';
 
-for($i=0; $i<10; $i++){
-    echo $i.'a';
+if($id){
+    echo $domains;
+}else{
+    echo 'no list found';
+}
 
-    //this is for the buffer achieve the minimum size in order to flush data
-    //echo str_repeat(' ',1024*64);
+function getList(){
+    $data = file_get_contents('http://intern.kat2.net/api/domaining/get-list/');
+    $array = json_decode($data, true);
 
-    sleep(1);
+    if($array['success']){
+        getDomains($row['url']);
+        return $row['id'];
+    }else{
+        return false;
+    }
+}
+
+function getDomains($url){
+    global $domains;
+    
+    $domains = file_get_contents($url);
 }
