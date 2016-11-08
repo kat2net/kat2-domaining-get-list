@@ -7,7 +7,7 @@ $domains = array();
 
 if(getList()){
     foreach($domains as $domain){
-        if(isAvailable($domain['domain'], $domain['tld'])){
+        if(tooSend($domain['domain'], $domain['tld'])){
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
     }
@@ -65,7 +65,7 @@ function getTLD($domain){
     return str_replace(explode('.', $domain)[0].'.', '', $domain);
 }
 
-function isAvailable($domain, $tld){
+function tooSend($domain, $tld){
     $call = new Phois\Whois\Whois($sld);
     $whois_answer = $domain->info();
     if($call->isAvailable()){
