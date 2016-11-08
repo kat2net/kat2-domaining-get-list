@@ -6,11 +6,15 @@ if(getList()){
     foreach($domains as $domain){
         $isAvailable = isAvailable($domain['domain'], $domain['tld']);
         if($isAvailable){
+            echo $domain['domain']."\n";
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
     }
     echo time()."\n";
     echo 'done';
+
+    //remove lock
+    unlink('/app/d/lock');
 }else{
     echo 'no list found';
 }
