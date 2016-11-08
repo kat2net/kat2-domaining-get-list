@@ -4,7 +4,7 @@ header('Access-Control-Allow-Origin: *');
 $domains = '';
 
 if(getList()){
-    echo $domains;
+    print_r($domains);
 }else{
     echo 'no list found';
 }
