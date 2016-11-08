@@ -1,8 +1,7 @@
 {
     "scripts": {
         "post-install-cmd": [
-            "mkdir app/a",
-            "chmod -R 777 app/b"
+            "chmod -R 777 app/d"
         ]
     }
 }
