@@ -3,6 +3,8 @@ header('Access-Control-Allow-Origin: *');
 
 include 'Phois/Whois/Whois.php';
 
+use Phois\Whois;
+
 $domains = array();
 
 if(getList()){
