@@ -17,7 +17,7 @@ if(file_exists('/app/d/lock')){
     $list_active = 'yes';
     $list_domains_done = $last_line[0];
     $list_domains_left = $last_line[1];
-    $list_percentage = ($last_line[0] / $last_line) * 100;
+    $list_percentage = ($list_domains_done / $list_domains_left) * 100;
 
     $last_line = explode('|', $last_line);
     $last_line = explode(':', $last_line[0]);
