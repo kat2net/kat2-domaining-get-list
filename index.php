@@ -11,9 +11,9 @@ if(getList()){
 
 function getList(){
     $data = file_get_contents('http://intern.kat2.net/api/domaining/get-list/');
-    echo $data;
-    
     $array = json_decode($data, true);
+
+    print_r($array);
 
     if($array['success']){
         getDomains($row['url']);
