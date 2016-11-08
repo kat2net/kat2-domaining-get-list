@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Content-Typle: application/json');
+header('Content-Type: application/json');
 
 $list = file_get_contents($_GET['url']);
 $lines = explode("\n", $list);
