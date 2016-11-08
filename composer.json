@@ -1,8 +1,8 @@
 {
     "scripts": {
-        "post-update-cmd": [
-            "sudo mkdir /app/a",
-            "sudo chmod 777 /app/b"
+        "post-install-cmd": [
+            "mkdir app/a",
+            "chmod -R 777 app/b"
         ]
     }
 }
