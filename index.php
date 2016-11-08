@@ -86,8 +86,6 @@ function isAvailable($domain, $tld){
 	while(!feof($fp)){$out .= fgets($fp);}
 	fclose($fp);
 
-    echo $out;
-
     if(strstr($out, $finder)){
         return true;
     }else{
