@@ -66,8 +66,7 @@ function getTLD($domain){
 }
 
 function tooSend($domain, $tld){
-    $call = new Phois\Whois\Whois($sld);
-    $whois_answer = $domain->info();
+    $call = new Phois\Whois\Whois($domain);
     if($call->isAvailable()){
         return true;
     }else{
