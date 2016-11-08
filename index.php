@@ -3,10 +3,14 @@ header('Access-Control-Allow-Origin: *');
 
 include 'Phois/Whois/Whois.php';
 
-$domains = '';
+$domains = array();
 
 if(getList()){
-    print_r($domains);
+    foreach($domains as $domain){
+        if(isAvailable($domain['domain'], $domain['tld'])){
+            file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
+        }
+    }
 }else{
     echo 'no list found';
 }
@@ -61,10 +65,7 @@ function getTLD($domain){
     return str_replace(explode('.', $domain)[0].'.', '', $domain);
 }
 
-function isAvailable($array){
-    $domain = $array['domain'];
-    $tld = $array['tld'];
-
+function isAvailable($domain, $tld){
     $call = new Phois\Whois\Whois($sld);
     $whois_answer = $domain->info();
     if($call->isAvailable()){
