@@ -1,17 +1,15 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-include 'Phois/Whois/Whois.php';
-
-use Phois\Whois;
-
 $domains = array();
 
 if(getList()){
     foreach($domains as $domain){
-        if(tooSend($domain['domain'], $domain['tld'])){
+        $isAvailable = isAvailable($domain['domain'], $domain['tld']);
+        if($isAvailable){
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
+        break;
     }
 }else{
     echo 'no list found';
@@ -46,9 +44,9 @@ function getDomains($url){
                 if(
                     ($tld == 'com')
                     ||
-                    ($tld == 'org')
-                    ||
                     ($tld == 'net')
+                    ||
+                    ($tld == 'org')
                 ){
                     $domains[] = array(
                         'domain' => $line,
@@ -67,11 +65,30 @@ function getTLD($domain){
     return str_replace(explode('.', $domain)[0].'.', '', $domain);
 }
 
-function tooSend($domain, $tld){
-    $call = new Phois\Whois\Whois($domain);
-    if($call->isAvailable()){
+function isAvailable($domain, $tld){
+    $finders = array(
+        'com' => array('whois.crsnic.net', 'No match for'),
+        'net' => array('whois.crsnic.net', 'No match for'),
+        'org' => array('whois.publicinterestregistry.net', 'NOT FOUND')
+    );
+
+    $server = $finders[$tld][0];
+    $finder = $finders[$tld][1];
+
+	$fp = @fsockopen($server, 43, $errno, $errstr, 10) or die("Socket Error " . $errno . " - " . $errstr);
+	if($server == "whois.verisign-grs.com"){
+        $domain = "domain ".$domain;
+    }
+	fputs($fp, $domain . "\r\n");
+	$out = "";
+	while(!feof($fp)){$out .= fgets($fp);}
+	fclose($fp);
+
+    echo $out;
+
+    if(strstr($out, $finder)){
         return true;
     }else{
-        return true;
+        return false;
     }
 }
