@@ -4,13 +4,15 @@ header('Access-Control-Allow-Origin: *');
 $domains = array();
 
 if(getList()){
+    echo time()."\n";
     foreach($domains as $domain){
         $isAvailable = isAvailable($domain['domain'], $domain['tld']);
         if($isAvailable){
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
-        break;
     }
+    echo time()."\n";
+    echo 'done';
 }else{
     echo 'no list found';
 }
