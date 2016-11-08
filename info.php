@@ -3,7 +3,8 @@ header('Content-Type: application/json');
 
 $worker_name = getenv('worker_name');
 
-$list_active = 'N/A';
+$list_active = 'no';
+$list_id = '';
 $list_domains_done = '';
 $list_domains_left = '';
 $list_percentage = '';
@@ -15,6 +16,7 @@ if(file_exists('/app/d/lock')){
     $last_line = explode(':', $last_line[0]);
 
     $list_active = 'yes';
+    $list_id = $last_line[2];
     $list_domains_done = $last_line[0];
     $list_domains_left = $last_line[1];
     $list_percentage = ($list_domains_done / $list_domains_left) * 100;

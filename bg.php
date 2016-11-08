@@ -1,13 +1,14 @@
 <?php
 $domains = array();
 
-if(getList()){
+$list = getList();
+if($list){
     $i = 1;
     $c = count($domains);
     foreach($domains as $domain){
         $isAvailable = isAvailable($domain['domain'], $domain['tld']);
         if($isAvailable){
-            echo $i.':'.$c.'|'.$domain['domain']."\n";
+            echo $i.':'.$c.':'.$list.'|'.$domain['domain']."\n";
             file_get_contents('http://intern.kat2.net/api/domaining/add-domain/?domain='.$domain['domain']);
         }
         $i++;
