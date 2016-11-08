@@ -14,8 +14,8 @@ function getList(){
     $array = json_decode($data, true);
 
     if($array['success'] == true){
-        getDomains($row['url']);
-        return $row['id'];
+        getDomains($array['url']);
+        return $array['id'];
     }else{
         return false;
     }
