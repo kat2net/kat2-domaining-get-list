@@ -6,7 +6,10 @@ $worker_name = getenv('worker_name');
 $list_active = 'N/A';
 
 $data = file('/app/d/output');
-$line = $data[count($data)-2];
+$last_line = $data[count($data)-2];
+
+$last_line = explode('|', $last_line);
+$last_line = explode(':', $last_line[0]);
 
 $array = array(
     'worker' => array(
@@ -14,12 +17,12 @@ $array = array(
     ),
     'list' => array(
         'active' => $list_active,
-        'domains_done' => $list_active,
-        'domains_left' => $list_active
+        'domains_done' => $last_line[0],
+        'domains_left' => $last_line[1]
         
     ),
     'output' => array(
-        'last_line' => $line
+        'last_line' => $last_line
     )
 );
 
