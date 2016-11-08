@@ -1,6 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
+include 'Phois/Whois/Whois.php';
+
 $domains = '';
 
 if(getList()){
@@ -57,4 +59,17 @@ function getDomains($url){
 
 function getTLD($domain){
     return str_replace(explode('.', $domain)[0].'.', '', $domain);
+}
+
+function isAvailable($array){
+    $domain = $array['domain'];
+    $tld = $array['tld'];
+
+    $call = new Phois\Whois\Whois($sld);
+    $whois_answer = $domain->info();
+    if($call->isAvailable()){
+        return true;
+    }else{
+        return true;
+    }
 }
