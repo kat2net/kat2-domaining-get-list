@@ -30,6 +30,7 @@ $array = array(
         'name' => $worker_name
     ),
     'list' => array(
+        'id' => $list_id,
         'active' => $list_active,
         'domains_done' => $list_domains_done,
         'domains_left' => $list_domains_left,

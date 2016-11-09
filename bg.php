@@ -14,6 +14,8 @@ if($list){
         $i++;
     }
 
+    file_get_contents('http://intern.kat2.net/api/domaining/list-done/?id='.$list);
+
     //remove lock
     unlink('/app/d/lock');
 }else{
