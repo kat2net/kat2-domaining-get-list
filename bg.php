@@ -21,7 +21,7 @@ if($list){
 }
 
 function getList(){
-    $data = file_get_contents('http://intern.kat2.net/api/domaining/get-list/');
+    $data = file_get_contents('http://intern.kat2.net/api/domaining/get-list/?worker='.getenv('worker_name'));
     $array = json_decode($data, true);
 
     if($array['success'] == true){
